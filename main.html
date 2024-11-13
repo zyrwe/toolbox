@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toolbox</title>
+    <style>
+        /* Podstawowe style dla menu */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+        }
+        nav a:hover {
+            background-color: #555;
+        }
+        .menu-section {
+            display: none;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .menu-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Menu nawigacyjne -->
+<nav>
+    <a href="#" onclick="showSection('home')">Home</a>
+    <a href="#" onclick="showSection('tools')">Narzędzia</a>
+    <a href="#" onclick="showSection('about')">O nas</a>
+</nav>
+
+<!-- Sekcje strony -->
+<div id="home" class="menu-section active">
+    <h1>Witaj na stronie Toolbox!</h1>
+    <p>To jest nasza strona główna. Wybierz opcję z menu, aby zobaczyć więcej.</p>
+</div>
+
+<div id="tools" class="menu-section">
+    <h1>Narzędzia</h1>
+    <p>Tu znajdziesz różne narzędzia, które mogą Ci się przydać.</p>
+</div>
+
+<div id="about" class="menu-section">
+    <h1>O nas</h1>
+    <p>Dowiedz się więcej o naszej stronie i naszym zespole.</p>
+</div>
+
+<!-- Skrypt JavaScript do przełączania sekcji -->
+<script>
+    function showSection(sectionId) {
+        // Ukryj wszystkie sekcje
+        var sections = document.getElementsByClassName("menu-section");
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].classList.remove("active");
+        }
+
+        // Pokaż wybraną sekcję
+        var sectionToShow = document.getElementById(sectionId);
+        sectionToShow.classList.add("active");
+    }
+</script>
+
+</body>
+</html>
