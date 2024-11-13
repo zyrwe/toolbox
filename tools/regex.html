@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>RegEx Tester</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <h1>RegEx Tester</h1>
+    <textarea id="testString" placeholder="Enter text to test..."></textarea>
+    <input type="text" id="regexPattern" placeholder="Enter regular expression (e.g., \\d{3})" />
+    <button onclick="testRegex()">Test RegEx</button>
+    <p>Matches:</p>
+    <textarea id="regexResult" readonly></textarea>
+
+    <script>
+        function testRegex() {
+            const text = document.getElementById("testString").value;
+            const pattern = document.getElementById("regexPattern").value;
+            try {
+                const regex = new RegExp(pattern, 'g');
+                const matches = text.match(regex);
+                document.getElementById("regexResult").value = matches ? matches.join(", ") : "No matches found";
+            } catch (e) {
+                document.getElementById("regexResult").value = "Invalid RegEx pattern";
+            }
+        }
+    </script>
+</body>
+</html>
