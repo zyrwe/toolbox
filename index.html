@@ -2,17 +2,34 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Toolbox</title>
+    <title>Toolbox SPA</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Toolbox</h1>
     <nav>
         <ul>
-            <li><a href="tools/base64.html">Base64 Encoder/Decoder</a></li>
-            <li><a href="tools/regex.html">RegEx Tester</a></li>
-            <li><a href="tools/jinja.html">Jinja2 Code Checker</a></li>
+            <li><a href="#" onclick="loadTool('tools/base64.html')">Base64 Encoder/Decoder</a></li>
+            <li><a href="#" onclick="loadTool('tools/regex.html')">RegEx Tester</a></li>
+            <li><a href="#" onclick="loadTool('tools/jinja.html')">Jinja2 Code Checker</a></li>
         </ul>
     </nav>
+
+    <!-- Sekcja, do której będą ładowane narzędzia -->
+    <div id="tool-content">Wybierz narzędzie z menu powyżej.</div>
+
+    <script>
+        function loadTool(url) {
+            fetch(url)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById("tool-content").innerHTML = html;
+                })
+                .catch(error => {
+                    document.getElementById("tool-content").innerHTML = "Nie udało się załadować narzędzia.";
+                    console.error("Error loading tool:", error);
+                });
+        }
+    </script>
 </body>
 </html>

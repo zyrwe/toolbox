@@ -1,26 +1,16 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <title>Jinja2 Code Checker</title>
-    <link rel="stylesheet" href="../style.css">
-</head>
-<body>
-    <h1>Jinja2 Code Checker (Simulation)</h1>
-    <textarea id="templateInput" placeholder="Enter Jinja2-like template (use {{variable}})"></textarea>
-    <input type="text" id="variableInput" placeholder="Enter variable value (JSON format, e.g., {&quot;name&quot;: &quot;Alice&quot;})" />
-    <button onclick="renderTemplate()">Render Template</button>
-    <p>Rendered Output:</p>
-    <textarea id="renderResult" readonly></textarea>
+<h2>Jinja2 Code Checker (Simulation)</h2>
+<textarea id="templateInput" placeholder="Enter Jinja2-like template (use {{variable}})"></textarea>
+<input type="text" id="variableInput" placeholder="Enter variable value (JSON format, e.g., {&quot;name&quot;: &quot;Alice&quot;})" />
+<button onclick="renderTemplate()">Render Template</button>
+<p>Rendered Output:</p>
+<textarea id="renderResult" readonly></textarea>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.2.0/mustache.min.js"></script>
-    <script>
-        function renderTemplate() {
-            const template = document.getElementById("templateInput").value;
-            const variables = JSON.parse(document.getElementById("variableInput").value || "{}");
-            const output = Mustache.render(template, variables);
-            document.getElementById("renderResult").value = output;
-        }
-    </script>
-</body>
-</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.2.0/mustache.min.js"></script>
+<script>
+    function renderTemplate() {
+        const template = document.getElementById("templateInput").value;
+        const variables = JSON.parse(document.getElementById("variableInput").value || "{}");
+        const output = Mustache.render(template, variables);
+        document.getElementById("renderResult").value = output;
+    }
+</script>
