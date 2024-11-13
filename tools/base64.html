@@ -4,21 +4,3 @@
 <button onclick="decodeBase64()">Decode from Base64</button>
 <p>Result:</p>
 <textarea id="resultText" readonly></textarea>
-
-<script>
-    function encodeBase64() {
-        const text = document.getElementById("inputText").value;
-        const encoded = btoa(text);
-        document.getElementById("resultText").value = encoded;
-    }
-
-    function decodeBase64() {
-        const text = document.getElementById("inputText").value;
-        try {
-            const decoded = atob(text);
-            document.getElementById("resultText").value = decoded;
-        } catch (e) {
-            document.getElementById("resultText").value = "Invalid Base64 string";
-        }
-    }
-</script>

@@ -4,17 +4,3 @@
 <button onclick="testRegex()">Test RegEx</button>
 <p>Matches:</p>
 <textarea id="regexResult" readonly></textarea>
-
-<script>
-    function testRegex() {
-        const text = document.getElementById("testString").value;
-        const pattern = document.getElementById("regexPattern").value;
-        try {
-            const regex = new RegExp(pattern, 'g');
-            const matches = text.match(regex);
-            document.getElementById("regexResult").value = matches ? matches.join(", ") : "No matches found";
-        } catch (e) {
-            document.getElementById("regexResult").value = "Invalid RegEx pattern";
-        }
-    }
-</script>

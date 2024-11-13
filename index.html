@@ -18,17 +18,80 @@
     <!-- Sekcja, do której będą ładowane narzędzia -->
     <div id="tool-content">Wybierz narzędzie z menu powyżej.</div>
 
+    <!-- Skrypty z funkcjonalnościami narzędzi -->
     <script>
         function loadTool(url) {
             fetch(url)
                 .then(response => response.text())
                 .then(html => {
                     document.getElementById("tool-content").innerHTML = html;
+                    initializeTool(url); // Wywołaj odpowiednie funkcje po załadowaniu
                 })
                 .catch(error => {
                     document.getElementById("tool-content").innerHTML = "Nie udało się załadować narzędzia.";
                     console.error("Error loading tool:", error);
                 });
+        }
+
+        // Funkcja, która uruchamia odpowiednie skrypty w zależności od narzędzia
+        function initializeTool(url) {
+            if (url.includes("base64.html")) {
+                setupBase64Tool();
+            } else if (url.includes("regex.html")) {
+                setupRegexTool();
+            } else if (url.includes("jinja.html")) {
+                setupJinjaTool();
+            }
+        }
+
+        // Funkcje dla narzędzi
+        function setupBase64Tool() {
+            window.encodeBase64 = function() {
+                const text = document.getElementById("inputText").value;
+                const encoded = btoa(text);
+                document.getElementById("resultText").value = encoded;
+            };
+
+            window.decodeBase64 = function() {
+                const text = document.getElementById("inputText").value;
+                try {
+                    const decoded = atob(text);
+                    document.getElementById("resultText").value = decoded;
+                } catch (e) {
+                    document.getElementById("resultText").value = "Invalid Base64 string";
+                }
+            };
+        }
+
+        function setupRegexTool() {
+            window.testRegex = function() {
+                const text = document.getElementById("testString").value;
+                const pattern = document.getElementById("regexPattern").value;
+                try {
+                    const regex = new RegExp(pattern, 'g');
+                    const matches = text.match(regex);
+                    document.getElementById("regexResult").value = matches ? matches.join(", ") : "No matches found";
+                } catch (e) {
+                    document.getElementById("regexResult").value = "Invalid RegEx pattern";
+                }
+            };
+        }
+
+        function setupJinjaTool() {
+            // Załaduj Mustache.js, jeśli nie jest już załadowany
+            if (!window.Mustache) {
+                const script = document.createElement("script");
+                script.src = "https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.2.0/mustache.min.js";
+                script.onload = function() {
+                    window.renderTemplate = function() {
+                        const template = document.getElementById("templateInput").value;
+                        const variables = JSON.parse(document.getElementById("variableInput").value || "{}");
+                        const output = Mustache.render(template, variables);
+                        document.getElementById("renderResult").value = output;
+                    };
+                };
+                document.head.appendChild(script);
+            }
         }
     </script>
 </body>

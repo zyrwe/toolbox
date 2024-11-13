@@ -4,13 +4,3 @@
 <button onclick="renderTemplate()">Render Template</button>
 <p>Rendered Output:</p>
 <textarea id="renderResult" readonly></textarea>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.2.0/mustache.min.js"></script>
-<script>
-    function renderTemplate() {
-        const template = document.getElementById("templateInput").value;
-        const variables = JSON.parse(document.getElementById("variableInput").value || "{}");
-        const output = Mustache.render(template, variables);
-        document.getElementById("renderResult").value = output;
-    }
-</script>
