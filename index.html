@@ -12,6 +12,7 @@
             <li><a href="#" onclick="loadTool('tools/base64.html')">Base64 Encoder/Decoder</a></li>
             <li><a href="#" onclick="loadTool('tools/regex.html')">RegEx Tester</a></li>
             <li><a href="#" onclick="loadTool('tools/jinja.html')">Jinja2 Code Checker</a></li>
+            <li><a href="#" onclick="loadTool('tools/compare.html')">Text Comparator</a></li>
         </ul>
     </nav>
 
@@ -93,6 +94,35 @@
                 document.head.appendChild(script);
             }
         }
+        function setupComparatorTool() {
+    window.compareTexts = function() {
+        const text1 = document.getElementById("text1").value.trim();
+        const text2 = document.getElementById("text2").value.trim();
+        const result = compareTextDiff(text1, text2);
+        document.getElementById("comparisonResult").innerHTML = result;
+    };
+}
+
+// Funkcja porównująca teksty i podświetlająca różnice
+function compareTextDiff(text1, text2) {
+    const words1 = text1.split(/\s+/);
+    const words2 = text2.split(/\s+/);
+    let result = "";
+
+    const maxLength = Math.max(words1.length, words2.length);
+    for (let i = 0; i < maxLength; i++) {
+        const word1 = words1[i] || "";
+        const word2 = words2[i] || "";
+
+        if (word1 === word2) {
+            result += `<span>${word1} </span>`;
+        } else {
+            result += `<span class="diff">${word1 || ""} </span> <span class="diff">${word2 || ""} </span>`;
+        }
+    }
+    return result;
+}
+
     </script>
 </body>
 </html>

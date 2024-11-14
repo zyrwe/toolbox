@@ -53,3 +53,11 @@ button {
 button:hover {
     opacity: 0.9;
 }
+
+/* Stylizacja różnic */
+.diff {
+    background-color: #ffdddd;
+    color: #d32f2f;
+    padding: 2px;
+    border-radius: 3px;
+}
